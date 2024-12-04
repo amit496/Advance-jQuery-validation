@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAYS CODING : Password Validation</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+
+<body class="bg-zinc-950 flex justify-center">
+    <section class="w-auto h-auto mt-3 bg-white">
+        <header class="bg-violet-600 p-5 pl-6 pr-6">
+            <h2 class="text-3xl text-white tracking-wider">RAYS CODING : Password Validation</h2>
+        </header>
+        <form action="#" method="post" class="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
+            <label for="password" class="block text-xl font-semibold text-gray-700 mb-2 mt-2">Password</label>
+            <div class="relative">
+                <input type="password" name="password" id="password"
+                    class="w-full p-3 border-1 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-violet-600 text-gray-700 placeholder-gray-400 transition duration-300"
+                    placeholder="Enter your password" />
+            </div>
+
+
+            <div class="mt-5 bg-red-300 p-3 text-red-950 hidden" id="message"></div>
+
+
+            <button type="submit" id="submit-button"
+                class="mt-5 bg-violet-600 p-2 w-full text-white font-semibold shadow-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">Submit</button>
+        </form>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#submit-button').on('click', function (event) {
+                event.preventDefault();
+                var password = $('#password').val();
+
+
+                var messageBox = $('#message');
+
+
+                messageBox.removeClass('hidden').text('');
+
+
+                if (password === '' || password === null) {
+                    messageBox.text('Password cannot be empty.');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                var minMaxLengthPattern = /^.{8,16}$/;
+                var uppercasePattern = /[A-Z]/;
+                var lowercasePattern = /[a-z]/;
+                var digitPattern = /\d/;
+                var specialCharPattern = /[@#$%^&*!]/;
+                var spacePattern = /\s/;
+                var sequentialPattern = /012|123|234|345|456|567|678|789|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz/;
+
+
+                if (!minMaxLengthPattern.test(password)) {
+                    messageBox.text('Password must be between 8 to 16 characters.');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                if (!uppercasePattern.test(password)) {
+                    messageBox.text('Password must contain at least one uppercase letter (A-Z).');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                if (!lowercasePattern.test(password)) {
+                    messageBox.text('Password must contain at least one lowercase letter (a-z).');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                if (!digitPattern.test(password)) {
+                    messageBox.text('Password must contain at least one digit (0-9).');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                if (!specialCharPattern.test(password)) {
+                    messageBox.text('Password must contain at least one special character (@, #, $, %, etc.).');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                if (spacePattern.test(password)) {
+                    messageBox.text('Password cannot contain spaces.');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                var commonPasswords = ['password123', 'admin', 'qwerty', '123456', 'welcome'];
+                if (commonPasswords.includes(password.toLowerCase())) {
+                    messageBox.text('Password should not be a common or easily guessable word.');
+                    event.preventDefault();
+                    messageBox.addClass('bg-red-400 text-red-950');
+                    setTimeout(function () {
+                        messageBox.addClass('hidden');
+                    }, 3000);
+                    return false;
+                }
+
+
+                messageBox.text('Password is valid!');
+                messageBox.removeClass('bg-red-400 text-red-950').addClass('bg-green-300 text-green-950');
+                setTimeout(function () {
+                    messageBox.addClass('hidden');
+                }, 3000);
+            });
+        });
+    </script>
+
+</body>
+
+
+</html>
