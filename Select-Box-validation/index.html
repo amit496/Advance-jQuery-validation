@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAYS CODING : Radio Button Validation</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-zinc-950 flex justify-center">
+    <section class="w-auto h-auto mt-28 bg-white">
+        <header class="bg-violet-600 p-5 pl-6 pr-6">
+            <h2 class="text-3xl text-white tracking-wider">RAYS CODING : jQuery Radio Button Validation</h2>
+        </header>
+        <form action="#" method="post" class="p-5">
+            <div class="gender_container">
+                <Label>Gender</Label>
+                <div class="mt-1">
+                    <label class="block">
+                        <input type="radio" name="gender" value="female" class="gender-radio">
+                        Female
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="gender" value="male" class="gender-radio">
+                        Male
+                    </label>
+                </div>
+            </div>
+            <div class="age_container mt-5">
+                <Label>Age</Label>
+                <div class="mt-1">
+                    <label class="block">
+                        <input type="radio" name="age" value="under18" class="age-radio">
+                        Under 18
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="age" value="18-30" class="age-radio">
+                        18 - 30
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="age" value="30-50" class="age-radio">
+                        30 - 50
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="age" value="50andabove" class="age-radio">
+                        50 and above
+                    </label>
+                </div>
+            </div>
+            <div class="mt-5 bg-red-300 p-3 text-red-950 hidden" id="message"></div>
+            <button type="submit" class="mt-5 bg-violet-600 p-3 w-full text-white font-semibold tracking-wider"
+                id="submit-button">SUBMIT</button>
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                 
+    <script>
+        $(document).ready(function () {
+            $('#submit-button').on('click', function (e) {
+                e.preventDefault();
+                let selectedGender = $('input[name="gender"]:checked').val();
+                let selectedAge = $('input[name="age"]:checked').val();
+
+                if (!selectedAge && !selectedGender) {
+                    $('#message').removeClass('hidden bg-green-300 text-green-950').addClass('bg-red-300 text-red-950')
+                        .text('Please select both gender and age.').fadeIn().delay(3000).fadeOut(function () {
+                            $(this).addClass('hidden');
+                        });
+                } else if (!selectedAge) {
+                    $('#message').removeClass('hidden bg-green-300 text-green-950').addClass('bg-red-300 text-red-950')
+                        .text('Please select an age.').fadeIn().delay(3000).fadeOut(function () {
+                            $(this).addClass('hidden');
+                        });
+                } else if (!selectedGender) {
+                    $('#message').removeClass('hidden bg-green-300 text-green-950').addClass('bg-red-300 text-red-950')
+                        .text('Please select a gender.').fadeIn().delay(3000).fadeOut(function () {
+                            $(this).addClass('hidden');
+                        });
+                } else {
+                    $('#message').removeClass('hidden bg-red-300 text-red-950').addClass('bg-green-300 text-green-950')
+                        .text('You selected Gender: ' + selectedGender + ' and Age: ' + selectedAge + '.').fadeIn().delay(3000).fadeOut(function () {
+                            $(this).addClass('hidden');
+                        });
+                }
+            });
+        });
+    </script>
+                  
+</body>
+
+</html>
